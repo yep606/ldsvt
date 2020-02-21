@@ -1,5 +1,6 @@
 package base.controller;
 
+import base.exceptions.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,10 +36,17 @@ public class MessageController {
     }
 
     @GetMapping("{id}")
-    public Map<String, String> getMessage(@PathVariable int id){
+    public Map<String, String> getMessage(@PathVariable String id){
 
-        return list.get(id);
+        return geMessage(id);
 
+    }
+
+    private Map<String, String> geMessage(@PathVariable String id) {
+        return list.stream()
+                .filter(message -> message.get("id").equals(id))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
     }
 
     @PostMapping
@@ -48,6 +56,27 @@ public class MessageController {
         list.add(message);
 
         return message;
+
+    }
+
+    @PutMapping("{id}")
+    public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message){
+
+        Map<String, String> messageFDB = getMessage(id);
+
+        messageFDB.putAll(message);
+        messageFDB.put("id", id);
+
+        return messageFDB;
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id){
+
+        Map<String, String> message = getMessage(id);
+
+        list.remove(message);
+
 
     }
 
