@@ -64,7 +64,7 @@ Vue.component('message-row', {
         + '<span style="position: absolute; right: 0">' +
         '<input type="button" value="Edit" @click="edit" />' +
         '<input type="button" value="X" @click="del" />' +
-        '<span>' + '</div>',
+        '</span>' + '</div>',
     methods: {
         edit: function () {
             this.editMethod(this.message);
