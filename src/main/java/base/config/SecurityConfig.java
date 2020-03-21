@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
@@ -29,8 +31,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PrincipalExtractor principalExtractor(UserDetailsRepo userDetailsRepo){
 
         return map -> {
+            String id = (String) map.get("sub");
+            User user = userDetailsRepo.findById(id).orElseGet(() -> {
 
-            return new User();
+                User newUser = new User();
+
+                newUser.setId(id);
+                newUser.setName((String) map.get("name"));
+                newUser.setEmail((String) map.get("email"));
+                newUser.setGender((String) map.get("gender"));
+                newUser.setLocale((String) map.get("locale"));
+                newUser.setUserPic((String) map.get("picture"));
+
+                return newUser;
+
+            });
+
+            user.setLastVisit(LocalDateTime.now());
+
+           return userDetailsRepo.save(user);
 
         };
 
