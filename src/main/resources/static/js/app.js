@@ -1,7 +1,25 @@
+var messageApi = Vue.resource('/message/{id}');
+
+Vue.component('message-row', {
+
+    props: ['message'],
+    template: '<div><i>{{ message.id }}</i>{{ message.text }}</div>',
+
+});
+
 Vue.component('messages-list', {
 
     props: ['messages'],
-    template: '<div> <div v-for="message in messages">{{message.text}}</div> </div>'
+    template: '<div> <message-row v-for="message in messages" :key="message.id" :message="message"/> </div>',
+    created: function () {
+        messageApi.get().then(result =>
+            result.json().then(data =>
+
+                data.forEach(message => this.messages.push(message))
+
+            )
+        )
+    }
 });
 
 var app = new Vue({
@@ -9,9 +27,6 @@ var app = new Vue({
     template: '<messages-list :messages="messages"/>' ,
     data: {
         messages: [
-            {id: "123", text: "First"},
-            {id: "1234", text: "Second"},
-            {id: "12345", text: "Third"},
         ]
     }
-})
+});
