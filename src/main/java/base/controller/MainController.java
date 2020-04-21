@@ -1,6 +1,8 @@
 package base.controller;
 
 import base.domain.User;
+import base.repo.MessageRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +15,19 @@ import java.util.HashMap;
 @RequestMapping("/")
 public class MainController {
 
+    private final MessageRepo messageRepo;
+
+    @Autowired
+    public MainController(MessageRepo messageRepo) {
+        this.messageRepo = messageRepo;
+    }
+
+
     @GetMapping
     public String main(Model model, @AuthenticationPrincipal User user){
         HashMap<Object, Object> data = new HashMap<>();
         data.put("profile", user);
-        data.put("messages", null);
+        data.put("messages", messageRepo.findAll());
 
         model.addAttribute("frontendData", data);
         return "index";
