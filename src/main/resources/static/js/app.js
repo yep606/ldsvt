@@ -84,7 +84,7 @@ Vue.component('message-row', {
         del: function () {
             messageApi.remove({id: this.message.id}).then(result => {
 
-                if (result.ok){
+                if (result.ok) {
                     this.messages.splice(this.messages.indexOf(this.message), 1);
                 }
 
@@ -110,10 +110,10 @@ Vue.component('messages-list', {
         '<message-row v-for="message in messages" :key="message.id" :message="message" ' +
         ':messages="messages" :editMethod="editMethod"/> ' +
         '</div>',
+
     created: function () {
         messageApi.get().then(result =>
             result.json().then(data =>
-
                 data.forEach(message => this.messages.push(message))
             )
         )
