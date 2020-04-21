@@ -1,7 +1,9 @@
 package base.controller;
 
 import base.domain.Message;
+import base.domain.Views;
 import base.repo.MessageRepo;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class MessageController {
     }
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Message> list(){
 
         return repo.findAll();
@@ -28,6 +31,7 @@ public class MessageController {
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.FullMessage.class)
     public Message getOneMessage(@PathVariable("id") Message message){
 
         return message;
