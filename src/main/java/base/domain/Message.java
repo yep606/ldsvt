@@ -1,9 +1,11 @@
 package base.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -15,6 +17,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String text;
+    @Column(updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime creationData;
+
 
     public long getId() {
         return id;
@@ -31,4 +37,13 @@ public class Message {
     public void setText(String text) {
         this.text = text;
     }
+
+    public LocalDateTime getCreationData() {
+        return creationData;
+    }
+
+    public void setCreationData(LocalDateTime creationData) {
+        this.creationData = creationData;
+    }
+
 }
