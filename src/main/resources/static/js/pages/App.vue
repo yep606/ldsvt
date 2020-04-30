@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-app">
         <div v-if="!profile">Необходимо авторизоваться через
             <a href="/login">Google</a>
         </div>
@@ -40,4 +40,7 @@
 </script>
 
 <style>
+    .main-app{
+        color: chocolate;
+    }
 </style>
