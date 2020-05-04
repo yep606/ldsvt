@@ -2,16 +2,19 @@
     <v-app>
         <v-app-bar app>
             <v-toolbar-title> Chatty </v-toolbar-title>
-            {{profile.name}}
-            &nbsp;<a href="/logout">Log out</a>
+            <v-spacer></v-spacer>
+            <span v-if="profile">{{profile.name}}</span>
+            <v-btn v-if="profile" icon href="/logout">
+                <v-icon>mdi-exit-to-app</v-icon>
+            </v-btn>
         </v-app-bar>
         <v-content>
-            <div v-if="!profile">Необходимо авторизоваться через
+            <v-container fluid v-if="!profile">Необходимо авторизоваться через
                 <a href="/login">Google</a>
-            </div>
-            <div>
+            </v-container>
+            <v-container fluid v-if="profile">
                 <messages-list :messages="messages"/>
-            </div>
+            </v-container>
         </v-content>
     </v-app>
 </template>
