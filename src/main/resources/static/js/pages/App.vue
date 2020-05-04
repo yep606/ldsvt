@@ -1,13 +1,19 @@
 <template>
-    <div class="main-app">
-        <div v-if="!profile">Необходимо авторизоваться через
-            <a href="/login">Google</a>
-        </div>
-        <div v-else>
-            <div>{{profile.name}}&nbsp;<a href="/logout">Log out</a></div>
-            <messages-list :messages="messages"/>
-        </div>
-    </div>
+    <v-app>
+        <v-app-bar app>
+            <v-toolbar-title> Chatty </v-toolbar-title>
+            {{profile.name}}
+            &nbsp;<a href="/logout">Log out</a>
+        </v-app-bar>
+        <v-content>
+            <div v-if="!profile">Необходимо авторизоваться через
+                <a href="/login">Google</a>
+            </div>
+            <div>
+                <messages-list :messages="messages"/>
+            </div>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
@@ -40,7 +46,5 @@
 </script>
 
 <style>
-    .main-app{
-        color: chocolate;
-    }
+
 </style>
