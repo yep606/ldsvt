@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <v-toolbar-title> Chatty </v-toolbar-title>
+            <v-toolbar-title>Chatty</v-toolbar-title>
             <v-spacer></v-spacer>
             <span v-if="profile">{{profile.name}}</span>
             <v-btn v-if="profile" icon href="/logout">
@@ -9,10 +9,10 @@
             </v-btn>
         </v-app-bar>
         <v-content>
-            <v-container fluid v-if="!profile">Необходимо авторизоваться через
+            <v-container v-if="!profile">Необходимо авторизоваться через
                 <a href="/login">Google</a>
             </v-container>
-            <v-container fluid v-if="profile">
+            <v-container v-if="profile">
                 <messages-list :messages="messages"/>
             </v-container>
         </v-content>
