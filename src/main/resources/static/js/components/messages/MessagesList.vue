@@ -6,9 +6,8 @@
                      :message="message"
                      :editMessage="editMessage"
                      :deleteMessage="deleteMessage"
-                     :messages="messages" />
+                     :messages="messages"/>
     </v-layout>
-
 </template>
 
 <script>
@@ -26,23 +25,20 @@
             return {
                 message: null,
             }
-
         },
-
         computed: {
-            sortedMessages(){
-                return this.messages.sort((a,b) => -(a.id - b.id) )
+            sortedMessages() {
+                return this.messages.sort((a, b) => -(a.id - b.id))
             }
         },
-
         methods: {
             editMessage(message) {
                 this.message = message;
             },
-            deleteMessage(message){
+            deleteMessage(message) {
                 messagesApi.remove(message.id).then(result => {
                     if (result.ok) {
-                        this.messages.splice(this.messages.indexOf(message), 1);
+                        // this.messages.splice(this.messages.indexOf(message), 1);
                     }
                 })
             }
@@ -51,5 +47,4 @@
 </script>
 
 <style>
-
 </style>

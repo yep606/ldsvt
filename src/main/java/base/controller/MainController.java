@@ -28,7 +28,7 @@ public class MainController {
 
 
     @GetMapping
-    public String main(Model model, @AuthenticationPrincipal User user){
+    public String main(Model model, @AuthenticationPrincipal User user) {
         HashMap<Object, Object> data = new HashMap<>();
 
         if (user != null) {

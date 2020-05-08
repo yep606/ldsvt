@@ -8,7 +8,6 @@ import 'vuetify/dist/vuetify.min.css'
 if (frontendData.profile)
     connect();
 
-
 new Vue({
     el: '#app',
     vuetify,

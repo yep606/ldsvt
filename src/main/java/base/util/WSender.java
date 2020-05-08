@@ -22,7 +22,7 @@ public class WSender {
         this.mapper = mapper;
     }
 
-    public <T> BiConsumer<EventType, T> getSender(ObjectType objectType, Class view){
+    public <T> BiConsumer<EventType, T> getSender(ObjectType objectType, Class view) {
 
         ObjectWriter writer = mapper
                 .setConfig(mapper.getSerializationConfig())

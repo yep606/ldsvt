@@ -68,6 +68,4 @@ public class MessageController {
         wsSender.accept(EventType.REMOVE, message);
     }
 
-
-
 }

@@ -27,7 +27,6 @@
         components: {
             MessagesList
         },
-
         data() {
             return {
                 messages: frontendData.messages,
@@ -37,22 +36,22 @@
         created() {
             addHandler(data => {
                 if (data.objectType === "MESSAGE") {
-                    const  index = this.messages.findIndex(item => item.id === data.body.id);
+                    const index = this.messages.findIndex(item => item.id === data.body.id);
                     switch (data.eventType) {
                         case "CREATE":
                         case "UPDATE":
-                            if(index > -1)
+                            if (index > -1)
                                 this.messages.splice(index, 1, data.body);
                             else
-                                this.messages.push(data.body)
-                            break
+                                this.messages.push(data.body);
+                            break;
                         case "REMOVE":
-                            this.messages.splice(index, 1)
-                            break
+                            this.messages.splice(index, 1);
+                            break;
                         default:
                             console.error(`Unknown event type ${data.eventType}`)
                     }
-                }else {
+                } else {
                     console.error(`Unknown event type ${data.objectType}`)
                 }
             })
@@ -61,5 +60,4 @@
 </script>
 
 <style>
-
 </style>
