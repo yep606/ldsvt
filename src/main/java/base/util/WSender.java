@@ -14,8 +14,6 @@ import java.util.function.BiConsumer;
 @Component
 public class WSender {
 
-
-
     private final SimpMessagingTemplate template;
     private final ObjectMapper mapper;
 
