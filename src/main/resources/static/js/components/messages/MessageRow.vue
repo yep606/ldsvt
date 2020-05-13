@@ -15,18 +15,27 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     export default {
-        props: ['message', 'messages', 'editMessage', 'deleteMessage'],
+        props: ['message','editMessage'],
         methods: {
+            ...mapActions(['removeMessageAction']),
             edit() {
                 this.editMessage(this.message);
             },
             del() {
-                this.deleteMessage(this.message);
+                this.removeMessageAction(this.message);
             }
         }
     }
 </script>
 
 <style>
+    /*deleteMessage(message) {*/
+    /*messagesApi.remove(message.id).then(result => {*/
+    /*if (result.ok) {*/
+    /*// this.messages.splice(this.messages.indexOf(message), 1);*/
+    /*}*/
+    /*})*/
+    /*}*/
 </style>
