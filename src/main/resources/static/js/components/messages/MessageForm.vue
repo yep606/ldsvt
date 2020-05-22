@@ -10,6 +10,7 @@
 <script>
 
     import {mapActions} from 'vuex'
+
     export default {
         props: ['messageAttr'],
         data() {
@@ -25,7 +26,7 @@
             }
         },
         methods: {
-            ...mapActions(['addMessageAction','updateMessageAction']),
+            ...mapActions(['addMessageAction', 'updateMessageAction']),
             save() {
                 const message = {
                     id: this.id,
