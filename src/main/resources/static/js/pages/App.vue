@@ -2,8 +2,13 @@
     <v-app>
         <v-app-bar app>
             <v-toolbar-title>Chatty</v-toolbar-title>
+            <v-btn text v-if="profile" :disabled="$route.path === '/'" @click="showMessages">
+                Messages List
+            </v-btn>
             <v-spacer></v-spacer>
-            <span v-if="profile">{{profile.name}}</span>
+            <v-btn text v-if="profile" :disabled="$route.path === '/profile'" @click="showProfile">
+                {{profile.name}}
+            </v-btn>
             <v-btn v-if="profile" icon href="/logout">
                 <v-icon>mdi-exit-to-app</v-icon>
             </v-btn>
@@ -20,7 +25,15 @@
 
     export default {
         computed: mapState(['profile']),
-        methods: mapMutations(['addMessageMutation', 'updateMessageMutation', 'removeMessageMutation']),
+        methods: {
+            ...mapMutations(['addMessageMutation', 'updateMessageMutation', 'removeMessageMutation']),
+            showMessages(){
+                this.$router.push('/')
+            },
+            showProfile(){
+                this.$router.push('/profile')
+            },
+        },
         created() {
             addHandler(data => {
                 if (data.objectType === "MESSAGE") {
@@ -41,7 +54,14 @@
                     console.error(`Unknown event type ${data.objectType}`)
                 }
             })
+        },
+        beforeMount(){
+            if(!this.profile){
+                this.$router.replace('/auth');
+            }
+
         }
+
     }
 </script>
 
