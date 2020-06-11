@@ -4,7 +4,7 @@
             <i>({{ message.id }})</i>
             {{ message.text }}
         </v-card-text>
-        <media v-if="message.link" message="message"></media>
+        <media v-if="message.link" :message="message"></media>
         <v-card-actions>
             <v-btn value="Edit" @click="edit" small rounded>Edit</v-btn>
             <v-btn icon @click="del" small rounded>
