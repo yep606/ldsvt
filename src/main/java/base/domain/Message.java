@@ -31,8 +31,11 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonView(Views.FullMessage.class)
     private User author;
 
+    @OneToMany(mappedBy = "message", orphanRemoval = true)
+    @JsonView(Views.FullMessage.class)
     private List<Comment> comments;
 
     @JsonView(Views.FullMessage.class)
