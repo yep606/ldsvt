@@ -1,5 +1,4 @@
 <template>
-
     <v-card>
         <v-flex v-if="type === 'href'" xs12 sm6 offset-sm3>
             <v-img v-if="message.linkCover"
@@ -22,9 +21,7 @@
         </v-flex>
 
         <v-flex v-if="type === 'youtube'" xs12 sm6 offset-sm3>
-            <you-tube :src="message.link">
-
-            </you-tube>
+            <you-tube :src="message.link"> </you-tube>
         </v-flex>
     </v-card>
 </template>
@@ -42,12 +39,15 @@
             }
         },
         beforeMount() {
+            console.log(this.message.link);
             if(this.message.link.indexOf('youtu') > -1)
                 this.type = 'youtube';
             else if(this.message.link.match("\\.(jpeg|jpg|gif|png)$") !== null)
                 this.type = 'image';
             else
                 this.type = 'href';
+
+            console.log(this.type);
 
         }
 

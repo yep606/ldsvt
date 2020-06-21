@@ -5,15 +5,17 @@
 
 <script>
     export default {
-        name: "youtube",
+        name: "YouTube",
         props: ['src'],
         computed: {
-            targetSrc(){
-                let parts = this.src.split("/");
-                return `https://www.youtube.com/embed/${parts[parts.length - 1]}`;
+            targetSrc() {
+                let parts = this.src.split('/');
+                if (parts[parts.length - 1].indexOf("watch") > -1) {
+                    return `https://www.youtube.com/embed/${parts[parts.length - 1].slice(8)}`
+                } else
+                    return `https://www.youtube.com/embed/${parts[parts.length - 1]}`;
             }
         }
-
     }
 </script>
 
