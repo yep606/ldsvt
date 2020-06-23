@@ -27,6 +27,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     @JsonView(Views.FullMessage.class)
-    private User user;
+    private User author;
 
 }

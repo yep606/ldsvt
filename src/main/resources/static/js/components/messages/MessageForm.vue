@@ -2,7 +2,10 @@
     <v-layout row>
         <v-text-field
                 label="New message"
-                placeholder="Write new message" v-model="text"/>
+                placeholder="Write new message"
+                v-model="text"
+                @keyup.enter="save"
+        />
         <v-btn @click="save">Save</v-btn>
     </v-layout>
 </template>
