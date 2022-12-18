@@ -17,21 +17,19 @@ public class GController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name,
-                           Map<String, Object> model) {
-        model.put("name", name);
+    @GetMapping("/")
+    public String greeting(Map<String, Object> model) {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model){
         Iterable<User> users = userRepository.findAll();
         model.put("users", users);
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(@RequestParam String name,
                       @RequestParam String phoneNumber,
                       Map<String, Object> model) {
@@ -41,7 +39,7 @@ public class GController {
         Iterable<User> users = userRepository.findAll();
         model.put("users", users);
 
-        return "main";
+        return "redirect:main";
     }
 
     @PostMapping("filter")

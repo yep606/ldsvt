@@ -6,9 +6,14 @@
 </head>
 <body>
     <div>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        </form>
         <form method="post">
             <input type="text" name="name" placeholder="Имя пользователя">
             <input type="text" name="phoneNumber" placeholder="Номер телефона">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
             <button type="submit">Добавить</button>
         </form>
     </div>
@@ -16,6 +21,7 @@
     <div>Найти</div>
     <form method="post" action="filter">
         <input type="text" name="phoneNumber">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
         <button type="submit">Найти</button>
     </form>
     {{#users}}
